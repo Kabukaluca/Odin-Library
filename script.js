@@ -1,6 +1,4 @@
-const library = [
-
-];
+const library = [];
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -21,5 +19,32 @@ const book3 = new Book("Amtsblatt", "Uni-Bib", "879", false)
 
 function addBookToLibrary(book) {
     library.push(book);
+    generateBookCard(library);
+    document.querySelector(".card-container").innerHTML = `${generateBookCard(library)}`;
     return(`added ${book.title} by ${book.author} to your library`);
 };
+
+function generateBookCard(arg) {
+    let items = "";
+    for(let i = 0; i < arg.length; i++) {
+        const book = arg[i];
+        const title = book.title;
+        const author = book.author;
+        const pages = book.pages;
+        const readStatus = book.read ? "already read" : "not read yet";
+
+        items += `
+            <div class="card">
+                <h2>${title}</h2>
+                <p>by ${author}</p>
+                <p>${pages} pages</p>
+                <p>${readStatus}</p>
+            </div>
+        `;
+    };
+    return items;
+};
+
+addBookToLibrary(book1);
+
+document.querySelector(".card-container").innerHTML = `${generateBookCard(library)}`;

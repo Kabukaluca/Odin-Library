@@ -16,16 +16,36 @@
             <button type="button" class="login-button">Login</button>
         </div>
     </div>
+
     <div class="sidebar">
-        <button type="button" class="new-book">+ Add Book</button>
-        <div class="favorites">Favorites</div>
+        <button type="button" class="new-book-btn" id="new-book-btn">+ Add Book</button>
+        <input type="search" name="search" id="search" placeholder="Find book..">
+        <label for="search"></label>
+        <div class="sidebar-link">Home</div>
+        <div class="sidebar-link">Favorites</div>
+        <div class="sidebar-link">Recommended</div>
     </div>
-    <div class="content">
-        <div class="card">
-            <h2>Test</h2>
-            <p>by dude</p>
-            <p>123 pages</p>
-            <p>read</p>
+
+    <div class="content"></div>
+
+    <div class="form-overlay" id="form-overlay">
+        <div class="form-popup">
+            <h2>Add New Book</h2>
+            <form action="" id="add-book-form">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" required>
+                <br>
+                <label for="author">Author:</label>
+                <input type="text" name="title" id="title" required>
+                <br>
+                <label for="pages">Pages:</label>
+                <input type="number" name="pages" id="pages" required>
+                <br>
+                <label for="read">Read?</label>
+                <input type="checkbox" name="read" id="read">
+                <br>
+                <button id="add-book-btn">Add Book</button>
+            </form>
         </div>
     </div>
 </body>

@@ -29,12 +29,6 @@ body {
     align-items: center;
 }
 
-
-.header-right {
-
-}
-
-
 /* ===== Sidebar ===== */
 .sidebar {
     grid-area: sidebar;
@@ -97,7 +91,7 @@ body {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.5);
     justify-content: center;
     align-items: center;
 
@@ -106,14 +100,41 @@ body {
 .form-popup {
     display: flex;
     flex-direction: column;
-    width: 10rem;
-    height: 15rem;
+    width: 20rem;
+    height: 20rem;
     padding: 1rem;
 
     border: 1px solid black;
     border-radius: 15px;
+    background-color: white;
 }
 
-.form-popup > form > button{
+.form-popup > form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
+
+.form-popup > form > .form-row > #title,
+.form-popup > form > .form-row > #author,
+.form-popup > form > .form-row > #pages {
+    width: 100%;
+}
+
+
+.form-popup > form > .btn-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-popup > form > .form-row > button {
+    width: 40%;
+    height: 2rem;
+    background-color: blue;
+
+    border: none;
+    border-radius: 5px;
+    
+    justify-self: center;
 }

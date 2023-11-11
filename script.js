@@ -39,15 +39,29 @@ function displayBooks(arr) {
     arr.forEach(book => {createCard(book)});
 
     function createCard(book) {
-        content.innerHTML += `
-        <div class="card">
-            <h2>${book.title}</h2>
-            <p>by ${book.author}</p>
-            <p>${book.pages} pages</p>
-            <p>${book.info()}</p>
-        </div>`
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const title = document.createElement('h2');
+        title.textContent = book.title;
+
+        const author = document.createElement('p');
+        author.textContent = `by ${book.author}`;
+
+        const pages = document.createElement('p');
+        pages.textContent = `${book.pages} pages`;
+
+        const info = document.createElement('p');
+        info.textContent = book.info();
+
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(pages);
+        card.appendChild(info);
+
+        content.appendChild(card);
+        }
     };
-};
 
 
 /* ===== Eventlisteners ===== */

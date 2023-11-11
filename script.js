@@ -1,3 +1,7 @@
+/* ===== Query Selectors ===== */
+let content = document.querySelector(".content");
+
+
 /* ===== Constants ===== */
 const library = [];
 
@@ -11,9 +15,7 @@ const newBookBtn = document.getElementById("new-book-btn");
 const addBookBtn = document.getElementById("add-book-btn");
 
 
-
 /* ===== Functions ===== */
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -21,21 +23,20 @@ function Book(title, author, pages, read) {
     this.read = read;
     this.info = function() {
         const readStatus = this.read ? "already read" : "not read yet"
-        return(`${this.title} by ${this.author} , ${this.pages} pages , ${readStatus}`);
+    return `${readStatus}`;
     };
 };
 
-function addBookToLibrary() {
-
-
+function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
     library.push(newBook);
     displayBooks(library);
 }
 
-function displayBooks(arr) {    
-    arr.forEach(book => {createCard(book);
-    });
+function displayBooks(arr) { 
+    content.innerHTML = "";  
+
+    arr.forEach(book => {createCard(book)});
 
     function createCard(book) {
         content.innerHTML += `
@@ -43,48 +44,29 @@ function displayBooks(arr) {
             <h2>${book.title}</h2>
             <p>by ${book.author}</p>
             <p>${book.pages} pages</p>
-            <p>${book.readStatus}</p>
+            <p>${book.info()}</p>
         </div>`
     };
 };
 
 
-/* ===== Query Selectors ===== */
-let content = document.querySelector(".content");
-// document.querySelector(".content").innerHTML = `${generateBookCard(library)}`;
+/* ===== Eventlisteners ===== */
+newBookBtn.addEventListener("click", () => {
+    formOverlay.style.display = "flex";
+}); 
 
+addBookBtn.addEventListener("click", () => {
+    let titleValue = document.getElementById("title").value;
+    let authorValue = document.getElementById("author").value;
+    let pagesValue = document.getElementById("pages").value;
+    let readValue = document.getElementById("read").checked;
 
-/* ===== BACKUP ===== */
- /* function addBookToLibrary(book) {
-    library.push(book);
-    generateBookCard(library);
-    document.querySelector(".content").innerHTML = `${generateBookCard(library)}`;
-    return(`added ${book.title} by ${book.author} to your library`);
-};
-function generateBookCard(arg) {
-    let items = "";
-    for(let i = 0; i < arg.length; i++) {
-        const book = arg[i];
-        const title = book.title;
-        const author = book.author;
-        const pages = book.pages;
-        const readStatus = book.read ? "already read" : "not read yet";
+    addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
 
-        items += `
-            <div class="card">
-                <h2>${title}</h2>
-                <p>by ${author}</p>
-                <p>${pages} pages</p>
-                <p>${readStatus}</p>
-            </div>
-        `;
-    };
-    return items;
-};
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+    document.getElementById("read").checked = "";
 
-const removeBook = (index) => {
-    library.splice(index, 1);
-    console.log("book removed");
-
-    removeBookCard();
-} */
+    formOverlay.style.display = "none";
+});

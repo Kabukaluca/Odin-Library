@@ -69,12 +69,17 @@ newBookBtn.addEventListener("click", () => {
     formOverlay.style.display = "flex";
 }); 
 
-addBookBtn.addEventListener("click", () => {
+addBookBtn.addEventListener("click", (e) => {
+
+    
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
     let pagesValue = document.getElementById("pages").value;
     let readValue = document.getElementById("read").checked;
 
+    if (titleValue === "" || authorValue === "" || pagesValue === "") {
+        e.preventDefault();
+    } else {
     addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
 
     document.getElementById("title").value = "";
@@ -83,4 +88,5 @@ addBookBtn.addEventListener("click", () => {
     document.getElementById("read").checked = "";
 
     formOverlay.style.display = "none";
+    }
 });

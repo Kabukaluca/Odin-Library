@@ -36,7 +36,10 @@ function addBookToLibrary(title, author, pages, read) {
 function displayBooks(arr) { 
     content.innerHTML = "";  
 
-    arr.forEach(book => {createCard(book)});
+    arr.forEach((book, index) => {
+        createCard(book);
+        console.log(index);
+    });
 
     function createCard(book) {
         const card = document.createElement('div');
@@ -53,6 +56,8 @@ function displayBooks(arr) {
 
         const info = document.createElement('p');
         info.textContent = book.info();
+
+        card.setAttribute("data-index", library.indexOf(book));
 
         card.appendChild(title);
         card.appendChild(author);

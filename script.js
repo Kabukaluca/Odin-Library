@@ -57,16 +57,32 @@ function displayBooks(arr) {
         const info = document.createElement('p');
         info.textContent = book.info();
 
+        const remove = document.createElement('button');
+        remove.textContent = `Remove`;
+        remove.setAttribute("id", "book-remove-btn")
+
         card.setAttribute("data-index", library.indexOf(book));
 
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(info);
+        card.appendChild(remove);
+
+        remove.addEventListener("click", () => {
+            let index = card.getAttribute("data-index")
+            removeBook(index);
+        });
 
         content.appendChild(card);
         }
-    };
+};
+
+function removeBook(index) {
+    const cardIndex = parseInt(index);   
+    library.splice(cardIndex, 1);
+    displayBooks(library);
+}; 
 
 
 /* ===== Eventlisteners ===== */
@@ -76,7 +92,6 @@ newBookBtn.addEventListener("click", () => {
 
 addBookBtn.addEventListener("click", (e) => {
 
-    
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
     let pagesValue = document.getElementById("pages").value;
@@ -95,3 +110,7 @@ addBookBtn.addEventListener("click", (e) => {
     formOverlay.style.display = "none";
     }
 });
+
+
+
+

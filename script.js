@@ -3,11 +3,9 @@ let content = document.querySelector(".content");
 
 
 /* ===== Constants ===== */
-const library = [];
 
-const book1 = new Book("BGB", "Beck", "917", true);
-const book2 = new Book("Jura-Slam", "Fachschaft", "1", false)
-const book3 = new Book("Amtsblatt", "Uni-Bib", "879", false)
+const book1 = new Book("1984", "George Orwell", "328", true);
+const library = [book1];
 
 const newBookForm = document.getElementById("add-book-form");
 const formOverlay = document.getElementById("form-overlay");
@@ -21,7 +19,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function() {
+    this.readStatus = function() {
         const readStatus = this.read ? "already read" : "not read yet"
     return `${readStatus}`;
     };
@@ -54,8 +52,9 @@ function displayBooks(arr) {
         const pages = document.createElement('p');
         pages.textContent = `${book.pages} pages`;
 
-        const info = document.createElement('p');
-        info.textContent = book.info();
+        const readStatus = document.createElement('button');
+        readStatus.textContent = book.readStatus();
+        readStatus.setAttribute("class", "read-status-btn")
 
         const remove = document.createElement('button');
         remove.textContent = `Remove`;
@@ -66,13 +65,18 @@ function displayBooks(arr) {
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
-        card.appendChild(info);
+        card.appendChild(readStatus);
         card.appendChild(remove);
 
         remove.addEventListener("click", () => {
-            let index = card.getAttribute("data-index")
+            let index = card.getAttribute("data-index");
             removeBook(index);
         });
+
+        readStatus.addEventListener("click", () => {
+            let index = card.getAttribute("data-index");
+            changeReadStatus(index);
+        })
 
         content.appendChild(card);
         }
@@ -84,8 +88,20 @@ function removeBook(index) {
     displayBooks(library);
 }; 
 
+function changeReadStatus(index) {
+    const cardIndex = parseInt(index);
+    const book = library[cardIndex];
+    
+    book.read = !book.read;
+    displayBooks(library); 
+}
+
 
 /* ===== Eventlisteners ===== */
+document.addEventListener("DOMContentLoaded", () => {
+    displayBooks(library);
+});
+
 newBookBtn.addEventListener("click", () => {
     formOverlay.style.display = "flex";
 }); 
@@ -110,7 +126,3 @@ addBookBtn.addEventListener("click", (e) => {
     formOverlay.style.display = "none";
     }
 });
-
-
-
-

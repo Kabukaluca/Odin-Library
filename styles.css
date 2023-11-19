@@ -1,3 +1,15 @@
+/* ===== Colors ===== */
+
+:root {
+--primary-color: #1F191B;
+--secondary-color: #5A4C31;
+--tertiary-color: #CFBF84;
+--quarternary-color: #F3BB5C;
+--quinary-color: #FFFFFF;
+
+--tertiary-color-transparent: #cfbf847f;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -15,30 +27,68 @@ body {
 /* ===== Header ===== */
 .header {
     grid-area: header;
-    background-color: red;
+    background-color: var(--primary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3rem 0 3rem;
+    padding: 1rem 0 1rem 0;
 }
 
 .header-left {
+    padding-left: 2.5rem;
     font-size: 2rem;
+    letter-spacing: 0.3rem;
     display: flex;
-    gap: 2rem;
+    justify-content: center;
+
+    display: flex;
+    flex-direction: column;
+    color: var(--quinary-color);
+}
+
+.header-left > .logo-sub {
+    letter-spacing: 0.5rem;
+    font-size: 16px;
+    color: var(--tertiary-color);
+}
+
+.header-right {
+    width: 10rem;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
+.header-right > button {
+    width: 6rem;
+    height: 2rem;
+
+    color: var(--quinary-color);
+    background-color: var(--primary-color);
+    border: 1px solid var(--quarternary-color);
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.header-right > button:hover {
+    color: var(--primary-color);
+    background-color: var(--quarternary-color);
+}
+
+
 /* ===== Sidebar ===== */
-.sidebar {
+    .sidebar {
     grid-area: sidebar;
-    background-color: orange;
+    background-image: linear-gradient(var(--secondary-color),var(--primary-color));
     padding: 1rem;
     gap: 1rem;
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start
+    align-items: flex-start;
+
+    color: var(--quinary-color);
 }
 
 .sidebar > input {
@@ -46,6 +96,7 @@ body {
     border-radius: 10px;
     height: 1.75rem;
     width: 100%;
+    background-color: var(--quinary-color);
 }
 
 .sidebar > input::placeholder  {
@@ -53,19 +104,51 @@ body {
     letter-spacing: 1px;
 }
 
+.sidebar > button {
+    justify-self: center;
+    align-self: center;
+
+    height: 2.5rem;
+    width: 8rem;
+
+    border-radius: 7.5px;
+    border: 1px solid var(--quarternary-color);
+
+    color: var(--tertiary-color);
+    background-color: var(--secondary-color);
+
+    cursor: pointer;
+}
+
+.sidebar > button:hover {
+    color: var(--primary-color);
+    background-color: var(--quarternary-color);
+}
+
 .sidebar-link {
     font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-link:hover {
+    transform: scale(1.05);
 }
 
 
 /* ===== Main Content ===== */
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    justify-items: center;
+    padding-top: 1rem;
+
+    overflow: scroll;
 
     grid-area: content;
-    background-color: green;
+    background-image: linear-gradient(var(--quinary-color), var(--tertiary-color-transparent));
 }
 
 .card {
@@ -75,16 +158,57 @@ body {
     padding: 0 10px 0 10px;
     margin: 15px;
 
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 5px;
+
     font-size: 18px;
 
-    border: 1px solid black;
-    border-radius: 15px;
-    background-color: rgb(255, 244, 224);
+    border-radius: 10px;
+    color: var(--primary-color);
+    background-image: linear-gradient(to bottom right, var(--tertiary-color-transparent), var(--secondary-color));
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    transition: transform 0.2s ease;
+    /* cursor: default; */
 }
+
+.card:hover {
+    transform: scale(1.025);
+}
+
+.card > h2 {
+    display: flex;
+    justify-content: center;
+    letter-spacing: 0.2rem;
+    margin-top: 0.5rem;
+    padding: 0;
+    color: var(--primary-color);
+}
+
+.card > button {
+    height: 2rem;
+    cursor: pointer;
+    width: 80%;
+}
+
+.card > p,
+.card > button {
+    margin: 0;
+    padding: 0;
+}
+
+.read {
+    background-color: greenyellow;
+}
+
+.not-read {
+    background-color: red;
+}
+
 
 .form-overlay {
     display: none;
@@ -101,12 +225,40 @@ body {
     display: flex;
     flex-direction: column;
     width: 20rem;
-    height: 20rem;
+    height: 22.5rem;
     padding: 1rem;
 
-    border: 1px solid black;
+    border: 1px solid var(--primary-color);
     border-radius: 15px;
-    background-color: white;
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+}
+
+#close-form {
+    border: none;
+    border-radius: 25px;
+    color: var(--secondary-color);
+
+    height: 1rem;
+    width: 1rem;
+
+    font-weight: bold;
+
+    display: flex;
+    align-self: flex-end;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+#close-form:hover {
+    color: var(--primary-color);
+}
+
+.form-popup > h2 {
+    margin-top: 0;
 }
 
 .form-popup > form {
@@ -120,8 +272,11 @@ body {
 .form-popup > form > .form-row > #author,
 .form-popup > form > .form-row > #pages {
     width: 100%;
+    height: 1.5rem;
+    background-color: var(--quinary-color);
+    border: none;
+    border-radius: 5px;
 }
-
 
 .form-popup > form > .btn-row {
     display: flex;
@@ -129,12 +284,19 @@ body {
     align-items: center;
 }
 .form-popup > form > .form-row > button {
-    width: 40%;
-    height: 2rem;
-    background-color: blue;
+    width: 50%;
+    height: 2.5rem;
+    background-color: var(--quarternary-color);
+    color: var(--primary-color);
 
-    border: none;
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
     
     justify-self: center;
+    cursor: pointer;
+}
+
+.form-popup > form > .form-row > button:hover {
+    background-color: var(--primary-color);
+    color: var(--quarternary-color);
 }

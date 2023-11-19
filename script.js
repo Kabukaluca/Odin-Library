@@ -5,10 +5,13 @@ let content = document.querySelector(".content");
 /* ===== Constants ===== */
 
 const book1 = new Book("1984", "George Orwell", "328", true);
-const library = [book1];
+const book2 = new Book("test", "by tester", "123", false)
+const library = [book1, book2];
+const favoriteBooks = [book1];
 
 const newBookForm = document.getElementById("add-book-form");
 const formOverlay = document.getElementById("form-overlay");
+const closeForm = document.getElementById("close-form");
 const newBookBtn = document.getElementById("new-book-btn");
 const addBookBtn = document.getElementById("add-book-btn");
 
@@ -20,7 +23,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.readStatus = function() {
-        const readStatus = this.read ? "already read" : "not read yet"
+        const readStatus = this.read ? "already read" : "not read yet";
     return `${readStatus}`;
     };
 };
@@ -36,27 +39,26 @@ function displayBooks(arr) {
 
     arr.forEach((book, index) => {
         createCard(book);
-        console.log(index);
     });
 
     function createCard(book) {
-        const card = document.createElement('div');
-        card.classList.add('card');
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-        const title = document.createElement('h2');
-        title.textContent = book.title;
+        const title = document.createElement("h2");
+        title.textContent = `"${book.title}"`;
 
-        const author = document.createElement('p');
+        const author = document.createElement("p");
         author.textContent = `by ${book.author}`;
 
-        const pages = document.createElement('p');
+        const pages = document.createElement("p");
         pages.textContent = `${book.pages} pages`;
 
-        const readStatus = document.createElement('button');
+        const readStatus = document.createElement("button");
         readStatus.textContent = book.readStatus();
         readStatus.setAttribute("class", "read-status-btn")
 
-        const remove = document.createElement('button');
+        const remove = document.createElement("button");
         remove.textContent = `Remove`;
         remove.setAttribute("id", "book-remove-btn")
 
@@ -95,6 +97,18 @@ function changeReadStatus(index) {
     book.read = !book.read;
     displayBooks(library); 
 }
+/*
+function addBookToFavorites(index) {
+    const cardIndex = parseInt(index);
+    const book = library[cardIndex];
+
+    favoriteBooks.push(book);
+}
+
+function removeFavoriteBook(index) {
+    const cardIndex = parseInt(index);
+    const book = favoriteBooks.splice(cardIndex, 1);
+} */
 
 
 /* ===== Eventlisteners ===== */
@@ -125,4 +139,8 @@ addBookBtn.addEventListener("click", (e) => {
 
     formOverlay.style.display = "none";
     }
+});
+
+closeForm.addEventListener("click", () => {
+    formOverlay.style.display = ("none");
 });

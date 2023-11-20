@@ -46,7 +46,7 @@ function displayBooks(arr) {
         card.classList.add("card");
 
         const title = document.createElement("h2");
-        title.textContent = `"${book.title}"`;
+        title.textContent = `${book.title}`;
 
         const author = document.createElement("p");
         author.textContent = `by ${book.author}`;
@@ -85,10 +85,22 @@ function displayBooks(arr) {
 };
 
 function removeBook(index) {
-    const cardIndex = parseInt(index);   
-    library.splice(cardIndex, 1);
-    displayBooks(library);
-}; 
+    const cardIndex = parseInt(index);
+    const removeConfirm = document.getElementById("remove-confirm");
+    const confirm = document.getElementById("remove-confirm-yes-btn");
+    const unconfirm = document.getElementById("remove-confirm-no-btn");
+    
+    removeConfirm.style.display = ("flex");
+
+    confirm.addEventListener("click", () => {
+        removeConfirm.style.display = ("none");
+        library.splice(cardIndex, 1);
+        displayBooks(library);
+    });
+        unconfirm.addEventListener("click", () => {
+        removeConfirm.style.display = ("none");
+    });
+};
 
 function changeReadStatus(index) {
     const cardIndex = parseInt(index);

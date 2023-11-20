@@ -1,5 +1,4 @@
 /* ===== Colors ===== */
-
 :root {
 --primary-color: #1F191B;
 --secondary-color: #5A4C31;
@@ -7,7 +6,11 @@
 --quarternary-color: #F3BB5C;
 --quinary-color: #FFFFFF;
 
---tertiary-color-transparent: #cfbf847f;
+--primary-color-light: #1f191b85;
+--secondary-color-light: #5a4c3183;
+--tertiary-color-light: #cfbf847f;
+--quarternary-color-light: #f3bc5c7e;
+--quinary-color-light: #ffffff80;
 }
 
 body {
@@ -148,7 +151,7 @@ body {
     overflow: scroll;
 
     grid-area: content;
-    background-image: linear-gradient(var(--quinary-color), var(--tertiary-color-transparent));
+    background-image: linear-gradient(var(--quinary-color), var(--tertiary-color));
 }
 
 .card {
@@ -163,8 +166,9 @@ body {
     font-size: 18px;
 
     border-radius: 10px;
+    border: 1px solid var(--secondary-color);
     color: var(--primary-color);
-    background-image: linear-gradient(to bottom right, var(--tertiary-color-transparent), var(--secondary-color));
+    background-image: linear-gradient(to bottom right, var(--quinary-color-light), var(--quarternary-color-light));
 
     display: flex;
     flex-direction: column;
@@ -183,6 +187,7 @@ body {
 .card > h2 {
     display: flex;
     justify-content: center;
+    align-items: center;
     letter-spacing: 0.2rem;
     margin-top: 0.5rem;
     padding: 0;
@@ -193,6 +198,28 @@ body {
     height: 2rem;
     cursor: pointer;
     width: 80%;
+}
+
+.card > .read-status-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.card > #book-remove-btn {
+    width: 60%;
+    height: 1.75rem;
+
+    color: var(--primary-color);
+    background-color: transparent;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+.card > #book-remove-btn:hover {
+    color: var(--tertiary-color);
+    background-color: var(--primary-color);
+
+    border: 1px solid var(--quarternary-color);
 }
 
 .card > p,
@@ -210,6 +237,7 @@ body {
 }
 
 
+/* ===== Form Styles ===== */
 .form-overlay {
     display: none;
     position: fixed;
@@ -218,7 +246,6 @@ body {
     background-color: rgba(255, 255, 255, 0.5);
     justify-content: center;
     align-items: center;
-
 }
 
 .form-popup {
@@ -267,7 +294,6 @@ body {
     gap: 1rem;
 }
 
-
 .form-popup > form > .form-row > #title,
 .form-popup > form > .form-row > #author,
 .form-popup > form > .form-row > #pages {
@@ -299,4 +325,30 @@ body {
 .form-popup > form > .form-row > button:hover {
     background-color: var(--primary-color);
     color: var(--quarternary-color);
+}
+
+
+.remove-confirm {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-confirm-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 7.5rem;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
 }

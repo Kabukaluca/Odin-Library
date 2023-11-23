@@ -1,16 +1,10 @@
 /* ===== Colors ===== */
 :root {
 --primary-color: #1F191B;
---secondary-color: #5A4C31;
---tertiary-color: #CFBF84;
---quarternary-color: #F3BB5C;
+--secondary-color: #CFBF84;
+--tertiary-color: #F3BB5C; 
+--quarternary-color: #FCF5E5;
 --quinary-color: #FFFFFF;
-
---primary-color-light: #1f191b85;
---secondary-color-light: #5a4c3183;
---tertiary-color-light: #cfbf847f;
---quarternary-color-light: #f3bc5c7e;
---quinary-color-light: #ffffff80;
 }
 
 body {
@@ -19,11 +13,13 @@ body {
     height: 100vh;
 
     display: grid;
-    grid-template-columns: 1fr 10rem;
+    grid-template-columns: 1fr 12rem;
     grid-template-rows: 5rem 1fr;
     grid-template-areas:
     "header header"
     "content sidebar";
+
+    background-image: linear-gradient(var(--quinary-color) 50%, var(--quarternary-color));
 }
 
 
@@ -68,7 +64,7 @@ body {
 
     color: var(--quinary-color);
     background-color: var(--primary-color);
-    border: 1px solid var(--quarternary-color);
+    border: 1px solid var(--tertiary-color);
     border-radius: 5px;
 
     cursor: pointer;
@@ -76,22 +72,25 @@ body {
 
 .header-right > button:hover {
     color: var(--primary-color);
-    background-color: var(--quarternary-color);
+    background-color: var(--tertiary-color);
 }
 
 
 /* ===== Sidebar ===== */
     .sidebar {
     grid-area: sidebar;
-    background-image: linear-gradient(var(--secondary-color),var(--primary-color));
-    padding: 1rem;
+    background-image: linear-gradient(var(--primary-color) 20%,var(--tertiary-color) 110%);
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin: 0.75rem;
     gap: 1rem;
 
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
     color: var(--quinary-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
 }
 
 .sidebar > input {
@@ -111,21 +110,21 @@ body {
     justify-self: center;
     align-self: center;
 
-    height: 2.5rem;
-    width: 8rem;
+    height: 2.25rem;
+    width: 90%;
 
     border-radius: 7.5px;
-    border: 1px solid var(--quarternary-color);
+    border: 1px solid var(--tertiary-color);
 
-    color: var(--tertiary-color);
-    background-color: var(--secondary-color);
+    color: var(--quinary-color);
+    background-color: var(--primary-color);
 
     cursor: pointer;
 }
 
 .sidebar > button:hover {
     color: var(--primary-color);
-    background-color: var(--quarternary-color);
+    background-color: var(--tertiary-color);
 }
 
 .sidebar-link {
@@ -142,7 +141,7 @@ body {
 /* ===== Main Content ===== */
 .content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 1fr);
 
     justify-items: center;
@@ -151,93 +150,126 @@ body {
     overflow: scroll;
 
     grid-area: content;
-    background-image: linear-gradient(var(--quinary-color), var(--tertiary-color));
 }
 
 .card {
-    width: 10rem;
+    width: 25rem;
     height: 15rem;
     
     padding: 0 10px 0 10px;
     margin: 15px;
 
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 5px;
-
-    font-size: 18px;
+    box-shadow: var(--primary-color) 0px 2px 5px;
 
     border-radius: 10px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var();
     color: var(--primary-color);
-    background-image: linear-gradient(to bottom right, var(--quinary-color-light), var(--quarternary-color-light));
+    background-image: linear-gradient(160deg, var(--primary-color) 35%, var(--tertiary-color) 200%);
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
 
     transition: transform 0.2s ease;
-    /* cursor: default; */
 }
 
 .card:hover {
-    transform: scale(1.025);
+    transform: scale(1.01);
 }
 
-.card > h2 {
+.card > .card-heading {
+    width: 95%;
+    height: 4rem;
+    margin-top: 1rem;
+    letter-spacing: 0.3rem;
+    font-size: 16;
+
+    color: var(--tertiary-color);
+
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+
+    border: 1px solid white;
+}
+
+.card > .card-heading > h2 {
+    margin: 0.1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    
+    overflow: hidden;
+}
+
+.card > .card-content {
+    width: 90%;
+    padding: 0.5rem 0.25rem 0.5rem 0.25rem;
+    color: var(--secondary-color);
+
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    letter-spacing: 0.2rem;
-    margin-top: 0.5rem;
-    padding: 0;
-    color: var(--primary-color);
+    gap: 0.75rem;
 }
 
-.card > button {
-    height: 2rem;
-    cursor: pointer;
-    width: 80%;
-}
-
-.card > .read-status-btn {
-    background-color: transparent;
-    border: none;
-}
-
-.card > #book-remove-btn {
-    width: 60%;
-    height: 1.75rem;
-
-    color: var(--primary-color);
-    background-color: transparent;
-
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-}
-.card > #book-remove-btn:hover {
-    color: var(--tertiary-color);
-    background-color: var(--primary-color);
-
-    border: 1px solid var(--quarternary-color);
-}
-
-.card > p,
-.card > button {
+.card > .card-content > p {
     margin: 0;
     padding: 0;
 }
 
+.card > .card-btn {
+    margin-bottom: 0.75rem;
+
+    display: flex;
+    gap: 1rem;
+}
+
+.card > .card-btn > #book-remove-btn,
+.card > .card-btn > #favorite-btn {
+    height: 1.5rem;
+
+    background-color: var(--primary-color);
+    border: 1px solid var(--tertiary-color);
+    border-radius: 5px;
+    color: var(--quarternary-color);
+
+    cursor: pointer;
+}
+
 .read {
-    background-color: greenyellow;
+    height: 2rem;
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+
+    color: var(--primary-color);
+    background-color: rgb(22, 222, 22);
+
+    cursor: pointer;
+}
+
+.read:hover {
+    background-color: rgb(49, 149, 49);
 }
 
 .not-read {
-    background-color: red;
+    height: 2rem;
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+
+    color: var(--primary-color);
+    background-color: rgb(244, 44, 44);
+
+    cursor: pointer;
+}
+.not-read:hover {
+    background-color: rgb(204, 44, 44);
 }
 
 
-/* ===== Form Styles ===== */
+/* ===== Add Book Form ===== */
 .form-overlay {
     display: none;
     position: fixed;
@@ -257,7 +289,7 @@ body {
 
     border: 1px solid var(--primary-color);
     border-radius: 15px;
-    background-color: var(--tertiary-color);
+    background-image: linear-gradient(135deg, var(--tertiary-color), var(--primary-color));
     color: var(--primary-color);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
 }
@@ -265,7 +297,7 @@ body {
 #close-form {
     border: none;
     border-radius: 25px;
-    color: var(--secondary-color);
+    color: var(--primary-color);
 
     height: 1rem;
     width: 1rem;
@@ -281,7 +313,7 @@ body {
 }
 
 #close-form:hover {
-    color: var(--primary-color);
+    color: var(--quarternary-color);
 }
 
 .form-popup > h2 {
@@ -292,6 +324,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    letter-spacing: 0.1rem;
+}
+
+.form-popup > form > .form-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-popup > form > .form-row > label {
+    padding-left: 0.25rem;
 }
 
 .form-popup > form > .form-row > #title,
@@ -299,9 +343,23 @@ body {
 .form-popup > form > .form-row > #pages {
     width: 100%;
     height: 1.5rem;
-    background-color: var(--quinary-color);
-    border: none;
+    background-color: var(--quarternary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
+
+    display: flex;
+}
+
+.form-popup > form > .form-row > #title::placeholder,
+.form-popup > form > .form-row > #author::placeholder,
+.form-popup > form > .form-row > #pages::placeholder {
+    padding-left: 0.25rem;
+    justify-self: center;
+    align-self: center;
+}
+
+.form-popup > form > .form-row > #read {
+    cursor: pointer;
 }
 
 .form-popup > form > .btn-row {
@@ -325,9 +383,10 @@ body {
 .form-popup > form > .form-row > button:hover {
     background-color: var(--primary-color);
     color: var(--quarternary-color);
+    border: 1px solid var(--tertiary-color);
 }
 
-
+/* ===== Confirmation Popup ===== */
 .remove-confirm {
     display: none;
     position: fixed;

@@ -37,19 +37,22 @@
                 <div class="form-row">
                     <label for="title">Title:</label>
                     <input type="text" name="title" id="title" placeholder="The Art of Libraries" required maxlength="30">
+                    <div class="error" id="error-title">You have to enter a title</div>
                 </div>
 
                 <div class="form-row">
                     <label for="author">Author:</label>
                     <input type="text" name="author" id="author" placeholder="Kabuka" required maxlength="30">
+                    <div class="error" id="error-author">You have to enter an author</div>
                 </div>
 
                 <div class="form-row">
                     <label for="pages">Pages:</label>
                     <input type="number" name="pages" id="pages" placeholder="223" required>
+                    <div class="error" id="error-pages">You have to enter pages</div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row-read">
                     <label for="read">Read?</label>
                     <input type="checkbox" name="read" id="read">
                 </div>

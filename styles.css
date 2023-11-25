@@ -300,7 +300,7 @@ body {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
 }
@@ -430,22 +430,68 @@ body {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
 }
 
 .remove-confirm-popup {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 15rem;
-    height: 7.5rem;
+    width: 20rem;
+    height: 10rem;
+    padding: 1rem;
 
     border: 1px solid var(--primary-color);
     border-radius: 15px;
-    background-color: var(--tertiary-color);
+    
     color: var(--primary-color);
+    background-image: linear-gradient(180deg, var(--quarternary-color)5% , var(--tertiary-color)50%, var(--primary-color));
+
     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.remove-confirm-popup > h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.remove-confirm-msg {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: auto;
+
+    font-size: 1.2rem;
+
+    text-align: center;
+}
+
+.remove-confirm-btn-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.remove-confirm-btn-row > button {
+    width: 5rem;
+    height: 1.5rem;
+
+    color: var(--primary-color);
+    background-color: var(--quarternary-color);
+    
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.remove-confirm-btn-row > button:hover {
+    color: var(--quarternary-color);
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
 }

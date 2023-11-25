@@ -5,8 +5,7 @@ let content = document.querySelector(".content");
 /* ===== Constants ===== */
 
 const book1 = new Book("1984", "George Orwell", "328", true);
-const book2 = new Book("Test but in a very long way to test u", "by tester", "123", false)
-const library = [book1, book2];
+const library = [book1];
 const favoriteBooks = [book1];
 
 const newBookForm = document.getElementById("add-book-form");
@@ -27,7 +26,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.readStatus = function() {
-        const readStatus = this.read ? "Already read" : "Not read yet";
+        const readStatus = this.read ? "Already read" : "Not read";
     return `${readStatus}`;
     };
 };
@@ -114,11 +113,15 @@ function displayBooks(arr) {
 function removeBook(index) {
     const cardIndex = parseInt(index);
     const removeConfirm = document.getElementById("remove-confirm");
+    const removeConfirmMsg = document.querySelector(".remove-confirm-msg");
+
     const confirm = document.getElementById("remove-confirm-yes-btn");
     const unconfirm = document.getElementById("remove-confirm-no-btn");
+    let bookName = library[cardIndex].title;
     
+    removeConfirmMsg.textContent = `This will delete "${bookName}"`;
     removeConfirm.style.display = ("flex");
-
+    
     confirm.addEventListener("click", () => {
         removeConfirm.style.display = ("none");
         library.splice(cardIndex, 1);

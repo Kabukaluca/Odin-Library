@@ -119,7 +119,7 @@ function removeBook(index) {
     const unconfirm = document.getElementById("remove-confirm-no-btn");
     let bookName = library[cardIndex].title;
     
-    removeConfirmMsg.textContent = `This will delete "${bookName}"`;
+    removeConfirmMsg.innerHTML = `This action will remove <br> "${bookName}" <br> from your library`;
     removeConfirm.style.display = ("flex");
     
     confirm.addEventListener("click", () => {

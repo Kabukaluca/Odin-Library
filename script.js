@@ -120,15 +120,15 @@ function removeBook(index) {
     let bookName = library[cardIndex].title;
     
     removeConfirmMsg.innerHTML = `This action will remove <br> "${bookName}" <br> from your library`;
-    removeConfirm.style.display = ("flex");
+    removeConfirm.showModal();
     
     confirm.addEventListener("click", () => {
-        removeConfirm.style.display = ("none");
+        removeConfirm.close();
         library.splice(cardIndex, 1);
         displayBooks(library);
     });
         unconfirm.addEventListener("click", () => {
-        removeConfirm.style.display = ("none");
+        removeConfirm.close();
     });
 };
 
@@ -139,18 +139,6 @@ function changeReadStatus(index) {
     book.read = !book.read;
     displayBooks(library); 
 }
-/*
-function addBookToFavorites(index) {
-    const cardIndex = parseInt(index);
-    const book = library[cardIndex];
-
-    favoriteBooks.push(book);
-}
-
-function removeFavoriteBook(index) {
-    const cardIndex = parseInt(index);
-    const book = favoriteBooks.splice(cardIndex, 1);
-} */
 
 
 /* ===== Eventlisteners ===== */
@@ -159,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 newBookBtn.addEventListener("click", () => {
-    formOverlay.style.display = "flex";
+    formOverlay.showModal();
 }); 
 
 createBookBtn.addEventListener("click", (e) => {
@@ -189,7 +177,7 @@ createBookBtn.addEventListener("click", (e) => {
     document.getElementById("pages").value = "";
     document.getElementById("read").checked = "";
 
-    formOverlay.style.display = "none";
+    formOverlay.close();
     errorTitle.textContent = "";
     errorAuthor.textContent = "";
     errorPages.textContent = "";
@@ -197,7 +185,7 @@ createBookBtn.addEventListener("click", (e) => {
 });
 
 closeForm.addEventListener("click", () => {
-    formOverlay.style.display = ("none");
+    formOverlay.close();
     errorTitle.textContent = "";
     errorAuthor.textContent = "";
     errorPages.textContent = "";

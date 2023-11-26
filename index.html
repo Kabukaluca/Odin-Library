@@ -14,10 +14,11 @@
             <div class="logo-sub">The Modern Library</div>
         </div>
         <div class="header-right">
-            <button type="button" class="login-button">Login</button>
+            <button type="button" class="new-book-btn" id="new-book-btn">+ Add Book</button>
         </div> 
     </div>
 
+<!-- 
     <div class="sidebar">
         <button type="button" class="new-book-btn" id="new-book-btn">+ Add Book</button>
         <input type="search" name="search" id="search" placeholder="Find book..">
@@ -25,11 +26,12 @@
         <div class="sidebar-link">Home</div>
         <div class="sidebar-link">Favorites</div>
         <div class="sidebar-link">Recommended</div>
-    </div>
+    </div> 
+-->
 
     <div class="content"></div>
 
-    <div class="form-overlay" id="form-overlay">
+    <dialog data-modal class="form-overlay" id="form-overlay">
         <div class="form-popup">
             <div id="close-form">ⓧ</div>
             <h2>Add New Book</h2>
@@ -62,9 +64,9 @@
                 </div>
             </form>
         </div>
-    </div>
+    </dialog>
 
-    <div class="remove-confirm" id="remove-confirm">
+    <dialog data-modal class="remove-confirm" id="remove-confirm">
         <div class="remove-confirm-popup">
             <h2>Are you sure?</h2>
             <p class="remove-confirm-msg"></p>
@@ -73,6 +75,6 @@
                 <button id="remove-confirm-no-btn">Cancel</button>
             </div>
         </div>
-    </div>
+    </dialog>
 </body>
 </html>

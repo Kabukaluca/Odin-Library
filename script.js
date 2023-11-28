@@ -3,10 +3,9 @@ let content = document.querySelector(".content");
 
 
 /* ===== Constants ===== */
-
-const book1 = new Book("1984", "George Orwell", "328", true);
-const library = [book1];
-const favoriteBooks = [book1];
+const book1 = new Book("Atomic Habbits", "James Clear", "320", false);
+const book2 = new Book("Thinking, fast and slow", "Daniel Kahneman", "512", true);
+const library = [book1, book2];
 
 const newBookForm = document.getElementById("add-book-form");
 const formOverlay = document.getElementById("form-overlay");
@@ -120,14 +119,17 @@ function removeBook(index) {
     let bookName = library[cardIndex].title;
     
     removeConfirmMsg.innerHTML = `This action will remove <br> "${bookName}" <br> from your library`;
+    removeConfirm.classList.add("active");
     removeConfirm.showModal();
     
     confirm.addEventListener("click", () => {
+        removeConfirm.classList.remove("active");
         removeConfirm.close();
         library.splice(cardIndex, 1);
         displayBooks(library);
     });
         unconfirm.addEventListener("click", () => {
+        removeConfirm.classList.remove("active");
         removeConfirm.close();
     });
 };
@@ -148,10 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 newBookBtn.addEventListener("click", () => {
     formOverlay.showModal();
+    formOverlay.classList.add("active");
 }); 
 
 createBookBtn.addEventListener("click", (e) => {
-
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
     let pagesValue = document.getElementById("pages").value;
@@ -178,6 +180,8 @@ createBookBtn.addEventListener("click", (e) => {
     document.getElementById("read").checked = "";
 
     formOverlay.close();
+    formOverlay.classList.remove("active");
+
     errorTitle.textContent = "";
     errorAuthor.textContent = "";
     errorPages.textContent = "";

@@ -1,3 +1,39 @@
+// CLASSES
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    getTitle() {return this.title}
+    getAuthor() {return this.author}
+    getPages() {return this.pages}
+    getReadStatus() {
+        this.readStatus = function() {
+            const readStatus = this.read ? "Already read" : "Not read";
+            return `${readStatus}`;
+        }
+    }
+
+    setReadStatus(index) {
+        const cardIndex = parseInt(index);
+        const book = library[cardIndex];
+        
+        book.read = !book.read;
+        displayBooks(library); 
+    }
+
+    addBookToLibrary(title, author, pages, read) {
+        newBook = new Book(title, author, pages, read);
+        library.push(newBook);
+        displayBooks(library);
+    }
+};
+
+
+
 /* ===== Query Selectors ===== */
 let content = document.querySelector(".content");
 
@@ -19,22 +55,6 @@ const errorPages = document.getElementById("error-pages");
 
 
 /* ===== Functions ===== */
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.readStatus = function() {
-        const readStatus = this.read ? "Already read" : "Not read";
-    return `${readStatus}`;
-    };
-};
-
-function addBookToLibrary(title, author, pages, read) {
-    let newBook = new Book(title, author, pages, read);
-    library.push(newBook);
-    displayBooks(library);
-}
 
 function displayBooks(arr) { 
     content.innerHTML = "";  
@@ -134,13 +154,6 @@ function removeBook(index) {
     });
 };
 
-function changeReadStatus(index) {
-    const cardIndex = parseInt(index);
-    const book = library[cardIndex];
-    
-    book.read = !book.read;
-    displayBooks(library); 
-}
 
 
 /* ===== Eventlisteners ===== */

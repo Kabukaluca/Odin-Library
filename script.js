@@ -19,7 +19,7 @@ class Book {
     this.pages = pages;
     this.isRead = isRead
        this.toggleRead = function() {
-        this.isRead ? "Already read" : "Not read";
+        return (this.isRead ? "Already read" : "Not read");
         }
     }
 };
@@ -41,17 +41,17 @@ class Library {
         displayBooks(this.books);
     }
 
-    toggleRead(book) {
-        book.read = !book.isRead;
-        displayBooks(); 
+    toggleRead(index) {
+        this.books[index].isRead = !this.books[index].isRead;
+        displayBooks(this.books);
     }
 }
 
 let library = new Library();
 
 
-const addBook = (title, author, pages, read) => {
-    let newBook = new Book(title, author, pages, read);
+const addBook = (title, author, pages, isRead) => {
+    let newBook = new Book(title, author, pages, isRead);
     library.addBook(newBook);
 }
 
@@ -86,7 +86,7 @@ const createCard = (book) => {
     pages.textContent = `${book.pages} Pages`;
 
     const readStatus = document.createElement("button");
-    readStatus.textContent = book.isRead;
+    readStatus.textContent = book.toggleRead();
     readStatus.classList.add(book.isRead ? "read" : "not-read")
 
     const remove = document.createElement("button");

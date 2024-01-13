@@ -151,7 +151,7 @@ body {
 /* ===== Main Content ===== */
 #content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(22.5rem, 1fr));
     grid-template-rows: repeat(3, 1fr);
 
     justify-items: center;
@@ -400,8 +400,6 @@ body {
     border-radius: 5px;
     display: flex;
 }
-
-
 
 .form-popup > form > .form-row > input {
     padding-left: 0.3rem;

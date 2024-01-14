@@ -3,8 +3,8 @@ const content = document.getElementById("content");
 const newBookForm = document.getElementById("add-book-form");
 const formOverlay = document.getElementById("form-overlay");
 const closeFormBtn = document.getElementById("close-form-btn");
-const newBookBtn = document.getElementById("new-book-btn");
-const createBookBtn = document.getElementById("add-book-btn");
+const addBookBtn = document.getElementById("add-book-btn");
+const addBookBtnForm = document.getElementById("add-book-btn-form");
 
 const errorTitle = document.getElementById("error-title");
 const errorAuthor = document.getElementById("error-author");
@@ -18,10 +18,8 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead
-       this.toggleRead = function() {
-        return (this.isRead ? "Already read" : "Not read");
-        }
     }
+    toggleRead = () => {return (this.isRead ? "Already read" : "Not read")}
 };
 
 class Library {
@@ -63,64 +61,78 @@ const displayBooks = () => {
     });
 };
 
-const createCard = (book) => {
-    /* -- Card Layout -- */
-    const card = document.createElement("div");
-    const cardHeading = document.createElement("div");
-    const cardContent = document.createElement("div");
-    const cardBtn = document.createElement("div");
 
-    card.classList.add("card");
-    cardHeading.classList.add("card-heading");    
-    cardContent.classList.add("card-content");
-    cardBtn.classList.add("card-btn");
+// GET CARD CREATOR
+class CardCreator {
+    constructor(book) {
+        this.book = book;
+        this.library = library;
+        this.card = document.createElement("div");
+        this.cardHeading = document.createElement("div");
+        this.cardContent = document.createElement("div");
+        this.cardBtn = document.createElement("div");
 
-    /* -- Content Elements -- */
-    const title = document.createElement("h2");
-    title.textContent = `"${book.title}"`;
+        this.setupCardLayout();
+        this.setupContentElements();
+        this.setupEventListeners();
 
-    const author = document.createElement("p");
-    author.textContent = `${book.author}`;
-
-    const pages = document.createElement("p");
-    pages.textContent = `${book.pages} Pages`;
-
-    const readStatus = document.createElement("button");
-    readStatus.textContent = book.toggleRead();
-    readStatus.classList.add(book.isRead ? "read" : "not-read")
-
-    const remove = document.createElement("button");
-    remove.textContent = `Remove`;
-    remove.setAttribute("id", "book-remove-btn")
-
-    card.setAttribute("data-index", library.books.indexOf(book));
-
-    /* -- Append Elements -- */
-    cardHeading.appendChild(title);
-    cardContent.appendChild(author);
-    cardContent.appendChild(pages);
-    cardBtn.appendChild(readStatus);
-    cardBtn.appendChild(remove);
-
-    card.appendChild(cardHeading);
-    card.appendChild(cardContent);
-    card.appendChild(cardBtn);
-    
-    /* -- Card Eventlisteners -- */
-    remove.onclick = () => {
-        let index = card.getAttribute("data-index");
-        removeBook(index);
-    };
-
-    readStatus.onclick = () => {
-        let index = card.getAttribute("data-index");
-        library.toggleRead(index);
-    };
-
-    content.appendChild(card);
+        content.appendChild(this.card);
     }
 
-const removeBook = (index) => {
+    setupCardLayout() {
+        this.card.classList.add("card");
+        this.cardHeading.classList.add("card-heading");
+        this.cardContent.classList.add("card-content");
+        this.cardBtn.classList.add("card-btn");
+
+        this.card.appendChild(this.cardHeading);
+        this.card.appendChild(this.cardContent);
+        this.card.appendChild(this.cardBtn);
+
+        this.card.setAttribute("data-index", this.library.books.indexOf(this.book));
+    }
+
+    setupContentElements() {
+        const title = document.createElement("h2");
+        title.textContent = `"${this.book.title}"`;
+
+        const author = document.createElement("p");
+        author.textContent = `${this.book.author}`;
+
+        const pages = document.createElement("p");
+        pages.textContent = `${this.book.pages} Pages`;
+
+        const readStatus = document.createElement("button");
+        readStatus.textContent = this.book.toggleRead();
+        readStatus.classList.add(this.book.isRead ? "read" : "not-read");
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = `Remove`;
+        removeBtn.setAttribute("id", "book-remove-btn");
+
+        this.cardHeading.appendChild(title);
+        this.cardContent.appendChild(author);
+        this.cardContent.appendChild(pages);
+        this.cardBtn.appendChild(readStatus);
+        this.cardBtn.appendChild(removeBtn);
+    }
+
+    setupEventListeners() {
+        this.cardBtn.querySelector("#book-remove-btn").addEventListener("click", () => {
+            let index = this.card.getAttribute("data-index");
+            removeBookConfirmation(index);
+        });
+
+        this.cardBtn.querySelector("button").addEventListener("click", () => {
+            let index = this.card.getAttribute("data-index");
+            this.library.toggleRead(index);
+        });
+    }
+}
+
+let createCard = (book) => new CardCreator(book);
+
+const removeBookConfirmation = (index) => {
     const cardIndex = parseInt(index);
     const removeConfirm = document.getElementById("remove-confirm");
     const removeConfirmMsg = document.querySelector(".remove-confirm-msg");
@@ -136,8 +148,7 @@ const removeBook = (index) => {
     confirm.addEventListener("click", () => {
         removeConfirm.classList.remove("active");
         removeConfirm.close();
-        library.books.splice(cardIndex, 1);
-        displayBooks();
+        library.removeBook(index)
     });
         unconfirm.addEventListener("click", () => {
         removeConfirm.classList.remove("active");
@@ -145,7 +156,6 @@ const removeBook = (index) => {
     });
 };
 
-// Not yet Approved:
 const resetForm = () => {
     document.getElementById("title").value = "";
     document.getElementById("author").value = "";
@@ -161,18 +171,17 @@ const resetForm = () => {
 }
 
 
-
 /* ===== Eventlisteners ===== */
 document.addEventListener("DOMContentLoaded", () => {
     displayBooks();
 });
 
-newBookBtn.addEventListener("click", () => {
+addBookBtn.addEventListener("click", () => {
     formOverlay.showModal();
     formOverlay.classList.add("active");
 }); 
 
-createBookBtn.addEventListener("click", (e) => {
+addBookBtnForm.addEventListener("click", (e) => {
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
     let pagesValue = document.getElementById("pages").value;
@@ -196,11 +205,4 @@ createBookBtn.addEventListener("click", (e) => {
     };
 });
 
-
-// Maybe just call reset form inside ?
-closeFormBtn.addEventListener("click", () => {
-    formOverlay.close();
-    errorTitle.textContent = "";
-    errorAuthor.textContent = "";
-    errorPages.textContent = "";
-});
+closeFormBtn.addEventListener("click", () => {resetForm()});

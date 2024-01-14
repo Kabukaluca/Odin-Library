@@ -1,4 +1,4 @@
-/* ===== Constants ===== */
+// ===== Constants ===== //
 const content = document.getElementById("content");
 const newBookForm = document.getElementById("add-book-form");
 const formOverlay = document.getElementById("form-overlay");
@@ -11,7 +11,7 @@ const errorAuthor = document.getElementById("error-author");
 const errorPages = document.getElementById("error-pages");
 
 
-/* ===== Classes ===== */
+// ===== Classes ===== //
 class Book {
     constructor(title, author, pages, isRead) {
     this.title = title;
@@ -43,26 +43,8 @@ class Library {
         this.books[index].isRead = !this.books[index].isRead;
         displayBooks(this.books);
     }
-}
-
-let library = new Library();
-
-
-const addBook = (title, author, pages, isRead) => {
-    let newBook = new Book(title, author, pages, isRead);
-    library.addBook(newBook);
-}
-
-const displayBooks = () => { 
-    content.innerHTML = "";  
-
-    library.books.forEach((book) => {
-        createCard(book);
-    });
 };
 
-
-// GET CARD CREATOR
 class CardCreator {
     constructor(book) {
         this.book = book;
@@ -128,10 +110,24 @@ class CardCreator {
             this.library.toggleRead(index);
         });
     }
-}
+};
 
+let library = new Library();
 let createCard = (book) => new CardCreator(book);
 
+
+// ===== Functions ===== //
+const addBook = (title, author, pages, isRead) => {
+    let newBook = new Book(title, author, pages, isRead);
+    library.addBook(newBook);
+};
+const displayBooks = () => { 
+    content.innerHTML = "";  
+
+    library.books.forEach((book) => {
+        createCard(book);
+    });
+};
 const removeBookConfirmation = (index) => {
     const cardIndex = parseInt(index);
     const removeConfirm = document.getElementById("remove-confirm");
@@ -155,7 +151,6 @@ const removeBookConfirmation = (index) => {
         removeConfirm.close();
     });
 };
-
 const resetForm = () => {
     document.getElementById("title").value = "";
     document.getElementById("author").value = "";
@@ -168,19 +163,17 @@ const resetForm = () => {
 
     formOverlay.close();
     formOverlay.classList.remove("active");
-}
+};
 
 
-/* ===== Eventlisteners ===== */
+// ===== Eventlisteners ===== //
 document.addEventListener("DOMContentLoaded", () => {
     displayBooks();
 });
-
 addBookBtn.addEventListener("click", () => {
     formOverlay.showModal();
     formOverlay.classList.add("active");
 }); 
-
 addBookBtnForm.addEventListener("click", (e) => {
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
@@ -204,5 +197,4 @@ addBookBtnForm.addEventListener("click", (e) => {
     resetForm();
     };
 });
-
 closeFormBtn.addEventListener("click", () => {resetForm()});
